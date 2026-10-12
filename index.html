@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SignalLab — Trading Analysis</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><div><b>SignalLab</b><small>TECHNICAL ANALYSIS</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav active" data-view="dashboard">◫ <span>Dashboard</span></button>
+      <button class="nav" data-view="history">◷ <span>Signal History</span></button>
+      <button class="nav hidden" id="adminNav" data-view="admin">⚙ <span>Admin Panel</span></button>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span id="sideStatus">Checking data source…</span></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">TRADING WORKSPACE</div><h1 id="pageTitle">Dashboard</h1></div><div class="user-area"><span id="userEmail">Not signed in</span><button id="logoutBtn" class="btn secondary hidden">Log out</button></div></header>
+      <section id="authView" class="auth-layout">
+        <div class="auth-card">
+          <div class="eyebrow">WELCOME TO SIGNALLAB</div><h2>আপনার ট্রেডিং ওয়ার্কস্পেস</h2>
+          <p class="muted">লগইন করুন অথবা নতুন অ্যাকাউন্ট তৈরি করুন।</p>
+          <div class="tabs"><button class="tab active" id="loginTab">Login</button><button class="tab" id="registerTab">Create account</button></div>
+          <form id="authForm"><label>Email</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          <label>Password</label><input id="password" type="password" autocomplete="current-password" minlength="12" required placeholder="At least 12 characters">
+          <button class="btn primary full" id="authSubmit">Login</button></form><p class="fine">নিজের অ্যাকাউন্টের জন্য শক্তিশালী ও আলাদা পাসওয়ার্ড ব্যবহার করুন।</p>
+        </div>
+        <div class="auth-info"><div class="eyebrow">DATA-FIRST SIGNALS</div><h2>অনুমান নয়।<br>ডেটা যাচাই করে বিশ্লেষণ।</h2><p>সিগন্যাল কেবল তখনই তৈরি হবে যখন সার্ভার একটি কনফিগার করা মার্কেট ডেটা সোর্স থেকে পর্যাপ্ত, সাম্প্রতিক ক্যান্ডেল পাবে।</p><div class="pill-row"><span>Trend analysis</span><span>Support / Resistance</span><span>Candlestick patterns</span></div></div>
+      </section>
+      <section id="dashboardView" class="view hidden">
+        <div class="notice"><b>ডেটা সতর্কতা</b><span>এই অ্যাপ Quotex-এ ট্রেড করে না। বাইরের ডেটা ফিডের দাম Quotex-এর দাম থেকে আলাদা হতে পারে।</span></div>
+        <div class="grid stats">
+          <div class="stat-card"><span class="stat-label">DATA SOURCE</span><strong id="providerStatus">Checking…</strong><small id="providerDetail">Provider status</small></div>
+          <div class="stat-card"><span class="stat-label">MARKET MODE</span><strong id="modeStatus">Live Market</strong><small>OTC disabled until verified</small></div>
+          <div class="stat-card"><span class="stat-label">SIGNAL POLICY</span><strong>Conservative</strong><small>Insufficient data → WAIT / unavailable</small></div>
+        </div>
+        <div class="grid work-grid">
+          <div class="panel">
+            <div class="panel-head"><div><div class="eyebrow">TECHNICAL SCANNER</div><h2>Generate analysis</h2></div><span class="tag">No auto-trading</span></div>
+            <form id="signalForm" class="control-grid">
+              <div><label>Market</label><select id="marketMode"><option value="LIVE">Live Market</option><option value="OTC">OTC</option></select></div>
+              <div><label>Currency pair</label><select id="symbol"><option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option><option>AUD/USD</option><option>USD/CHF</option><option>EUR/GBP</option><option>NZD/USD</option><option>USD/CAD</option></select></div>
+              <div><label>Timeframe</label><select id="interval"><option value="1min">1 minute</option><option value="5min">5 minutes</option><option value="15min">15 minutes</option><option value="30min">30 minutes</option><option value="1h">1 hour</option></select></div>
+              <div class="button-wrap"><label>&nbsp;</label><button class="btn primary full" type="submit" id="generateBtn">Generate signal</button></div>
+            </form>
+            <div id="signalResult" class="result empty"><div class="result-icon">⌁</div><h3>Ready to analyze</h3><p>একটি পেয়ার ও টাইমফ্রেম নির্বাচন করে শুরু করুন।</p></div>
+          </div>
+          <div class="panel methodology"><div class="eyebrow">ANALYSIS ENGINE</div><h2>কীভাবে বিশ্লেষণ হয়</h2>
+            <div class="method-row"><span class="method-icon">↗</span><div><b>Trend analysis</b><p>9-period SMA বনাম 21-period SMA</p></div></div>
+            <div class="method-row"><span class="method-icon">⌖</span><div><b>Support & Resistance</b><p>সাম্প্রতিক 29টি ক্যান্ডেলের high/low range</p></div></div>
+            <div class="method-row"><span class="method-icon">▥</span><div><b>Candlestick patterns</b><p>Bullish / bearish engulfing ও pin bar</p></div></div>
+            <div class="warning-box">এই নিয়মভিত্তিক নমুনা ইঞ্জিন শিক্ষামূলক। এটি ব্যাকটেস্ট করা বা লাভের নিশ্চয়তা দেওয়া কৌশল নয়।</div>
+          </div>
+        </div>
+      </section>
+      <section id="historyView" class="view hidden"><div class="panel"><div class="panel-head"><div><div class="eyebrow">YOUR ACTIVITY</div><h2>Signal history</h2></div><button class="btn secondary" id="refreshHistory">Refresh</button></div><div id="historyTable" class="table-wrap">No history yet.</div></div></section>
+      <section id="adminView" class="view hidden"><div class="grid stats"><div class="stat-card"><span class="stat-label">TOTAL USERS</span><strong id="adminUsers">—</strong></div><div class="stat-card"><span class="stat-label">ACTIVE USERS</span><strong id="adminActive">—</strong></div><div class="stat-card"><span class="stat-label">ANALYSES</span><strong id="adminSignals">—</strong></div></div><div class="panel"><div class="panel-head"><div><div class="eyebrow">ADMINISTRATOR</div><h2>User management</h2></div><button class="btn secondary" id="refreshUsers">Refresh</button></div><div id="usersTable" class="table-wrap">Loading…</div></div><div class="panel"><div class="panel-head"><h2>Audit log</h2><button class="btn secondary" id="refreshAudit">Refresh</button></div><div id="auditTable" class="table-wrap">Loading…</div></div></section>
+      <div id="toast" class="toast hidden" role="status"></div>
+      <footer>SignalLab Starter · Technical analysis only · No guaranteed results · Not affiliated with Quotex</footer>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body></html>
